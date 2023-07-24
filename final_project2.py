@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(description="Locate objects in a live camera st
                                  epilog=detectNet.Usage() + videoSource.Usage() + videoOutput.Usage() + Log.Usage())
 
 parser.add_argument("input", type=str, default="/dev/video0", nargs='?', help="URI of the input stream")
-parser.add_argument("output", type=str, default="test/test_f2.png", nargs='?', help="URI of the output stream")
+parser.add_argument("output", type=str, default="", nargs='?', help="URI of the output stream")
 parser.add_argument("--network", type=str, default="facenet", help="pre-trained model to load (see below for options)")
 parser.add_argument("--overlay", type=str, default="none", help="detection overlay flags (e.g. --overlay=box,labels,conf)\nvalid combinations are:  'box', 'labels', 'conf', 'none'")
 parser.add_argument("--threshold", type=float, default=0.7, help="minimum detection threshold to use") 
