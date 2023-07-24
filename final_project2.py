@@ -7,7 +7,6 @@ import numpy as np
 font = cudaFont()
 from PIL import Image
 # parse the command line
-ages = []
 parser = argparse.ArgumentParser(description="Locate objects in a live camera stream using an object detection DNN.", 
                                  formatter_class=argparse.RawTextHelpFormatter, 
                                  epilog=detectNet.Usage() + videoSource.Usage() + videoOutput.Usage() + Log.Usage())
@@ -25,7 +24,7 @@ except:
         
 	parser.print_help()
 	sys.exit(0)
-#
+#get the input
 input = videoSource(args.input, argv=sys.argv)
 output = videoOutput(args.output, argv=sys.argv)
 	
@@ -54,6 +53,9 @@ while True:
         print("detected {:d} faces in image".format(len(detections)))
         print("/n")
     for detection in detections:
+	    #converts the webcam image into a np array and then back into a format that the model can use
+	    # it also crops the image to show just teh face to improve
+	    # teh accuracy of the face predictor model
         face_img = cudaFromNumpy(np.asarray(python_image.crop((detection.Left,detection.Top,detection.Right,detection.Bottom))))
         predictions = net2.Classify(face_img, topK = 1)
         for n, (classID, confidence) in enumerate(predictions):
@@ -76,9 +78,3 @@ while True:
     # exit on input/output EOS
     if not input.IsStreaming() or not output.IsStreaming():
         break
-        print(min(ages))
-        print(max(ages))
-        x = 0
-        for count in ages:
-            x += count
-        print("The models overall estimate for your age is ", round(x/len(ages)))
