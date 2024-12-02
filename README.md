@@ -5,8 +5,8 @@ This model is used to predict peoples ages based on their face. It is trained on
 ![A computer analyzes a face.]([https://imgur.com/HeyVfsW])
 
 ## The Algorithm
-The algorithim is used by recording a video on a Logitech webcam - supported by Jetson nano. It uses a 2GB Jetson Nano, and so it uses it a preflashed SD card flashed from the NVIDIA webpage. It uses a facenet to find a persons face in the image, then it crops the image to just hold the face. It then sends the face to the transfer learning model. The transfer model then predicts your age. It will try to guess your age to the best of its abilities. Then it will print out the age is it is confident. It is up to the user to interepret the information.
-Note: I ran this model on a realivly low epoch with information that was askew. The pretrained model is quite inacurrate.
+The algorithim is used by recording a video on a Logitech webcam - supported by Jetson nano. It uses a 2GB Jetson Nano, and uses a preflashed SD card flashed from the NVIDIA webpage. It uses a facenet-120 model to find a persons face in the image, identify the bounding boxes, and then crops the image to focus the face. It then sends the face to the transfer learning model, which then predicts your age. If the model is confident in one's age, then the model will print one's age to the terminal. 
+Note: The model may be inaccurate. 
 ## Running this project
 
 1. Connect to your Jetson Nano via VSCODE. 
